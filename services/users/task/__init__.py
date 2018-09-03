@@ -1,10 +1,7 @@
 from flask.cli import FlaskGroup
 
-from project import app, db
+from project import app
 
 cli = FlaskGroup(app)
 
-
-@app.shell_context_processor
-def ctx():
-    return {'app': app, 'db': db}
+from . import test, task_one
