@@ -1,0 +1,16 @@
+FROM python:3.6.5-slim
+
+WORKDIR /app
+
+COPY . /app
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gcc \
+    && apt-get install -y default-libmysqlclient-dev \
+                          mysql-client \
+                          redis-tools \
+    && pip install -r requirements.txt
+
+RUN pip install -r requirements.txt
+
+CMD flask run -h 0.0.0.0

@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+
+  users:
+    build:
+      context: ./services/users
+      dockerfile: Dockerfile-dev
+    container_name: app-users
+    volumes:
+      - './services/users:/app'
+    ports:
+      - 5001:5000
+    links:
+      - users-db:mysql
+    depends_on:
+      - users-db
+    environment:
+      - FLASK_APP=project/__init__.py
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=mysql://sample_user:sample_password@localhost:3306/sample
+  users-db:
+    image: mysql:5.7
+    restart: always
+    container_name: users-db
+    ports:
+      - "13306:3306"
+    environment:
+        MYSQL_USER: sample_user
+        MYSQL_PASSWORD: sample_password
+        MYSQL_ROOT_PASSWORD: rootpass
+        MYSQL_DATABASE: sample

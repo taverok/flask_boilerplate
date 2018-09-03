@@ -1,0 +1,4 @@
+Flask==1.0.2
+flask-sqlalchemy
+mysqlclient==1.3.12
+nose
