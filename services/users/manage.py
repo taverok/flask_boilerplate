@@ -1,11 +1,6 @@
-from project import app, db
+from flask.cli import FlaskGroup
+
 from task import cli
-
-
-@app.shell_context_processor
-def ctx():
-    return {'app': app, 'db': db}
-
 
 if __name__ == '__main__':
     cli()

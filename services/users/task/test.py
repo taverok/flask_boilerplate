@@ -5,6 +5,7 @@ from . import cli
 
 @cli.command()
 def test_all():
+    """Run all discovered tests"""
     tests = unittest.TestLoader().discover('test', pattern='test*.py')
     result = unittest.TextTestRunner(verbosity=2).run(tests)
 

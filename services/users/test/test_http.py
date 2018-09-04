@@ -1,13 +1,14 @@
 import unittest
 
-from project import app
+from project import create_app
 
 
-class ConfigTest(unittest.TestCase):
+class ClientTest(unittest.TestCase):
     def setUp(self):
-        self.client = app.test_client()
+        self.app = create_app()
+        self.client = self.app.test_client()
 
-    def test_config(self):
+    def test_default_page(self):
         response = self.client.get('/')
 
         self.assertEquals(response.status_code, 200)
